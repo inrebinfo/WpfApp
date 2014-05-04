@@ -1,0 +1,42 @@
+﻿<Window x:Class="Wpf.Samples.MVVM"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        Title="MVVM"
+        Height="480"
+        Width="640">
+    <StackPanel>
+        <GroupBox Margin="10" 
+                  Header="Person"
+                  IsEnabled="{Binding CanEditPerson}">
+            <StackPanel>
+                <Label>Vorname</Label>
+                <TextBox Text="{Binding Vorname, UpdateSourceTrigger=PropertyChanged}" />
+                <Label>Nachname</Label>
+                <TextBox Text="{Binding Nachname, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Margin="10" 
+                  Header="Firma"
+                  IsEnabled="{Binding CanEditFirma}">
+            <StackPanel>
+                <Label>Name</Label>
+                <TextBox Text="{Binding Firmenname, UpdateSourceTrigger=PropertyChanged}" />
+                <Label>UID</Label>
+                <TextBox Text="{Binding UID, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Margin="10" 
+                  Header="Debug">
+            <StackPanel>
+                <CheckBox IsChecked="{Binding IsFirma, Mode=OneWay}" 
+                          IsEnabled="False">Ist Firma</CheckBox>
+                <CheckBox IsChecked="{Binding CanEditPerson, Mode=OneWay}" 
+                          IsEnabled="False">Kann Person bearbeiten</CheckBox>
+                <CheckBox IsChecked="{Binding CanEditFirma, Mode=OneWay}" 
+                          IsEnabled="False">Kann Firma bearbeiten</CheckBox>
+            </StackPanel>
+        </GroupBox>
+    </StackPanel>
+</Window>

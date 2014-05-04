@@ -1,0 +1,17 @@
+﻿<Window x:Class="Wpf.Samples.OwnControls"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ctrls="clr-namespace:Wpf.Controls"
+        xmlns:ctrlsSamples="clr-namespace:Wpf.Samples"
+        xmlns:vmdlSamples="clr-namespace:Wpf.ViewModels.Samples"
+        Title="Own Controls"
+        Height="480"
+        Width="640">
+    <StackPanel Margin="10">
+        <Label>Name</Label>
+        <ctrlsSamples:PersonName DataContext="{Binding Person}" />
+        
+        <Label>Search for something</Label>
+        <ctrlsSamples:SearchTextBox SearchCommand="{Binding SearchCommand}" />
+    </StackPanel>
+</Window>
