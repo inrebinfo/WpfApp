@@ -9,25 +9,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Wpf.ViewModels;
-using Wpf.ViewModels.Samples;
 
 namespace Wpf
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaktionslogik für ContactForm.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ContactForm : Window
     {
-        public MainWindow()
+        public ContactForm(ContactEditViewModel model)
         {
             InitializeComponent();
 
-            //http://stackoverflow.com/questions/5545187/wpf-how-to-bind-a-command-to-the-listboxitem-using-mvvm
-
-            this.DataContext = new MainWindowViewModel();
+            this.DataContext = model;
         }
     }
 }

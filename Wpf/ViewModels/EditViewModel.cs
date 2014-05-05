@@ -6,34 +6,34 @@ using System.Collections.ObjectModel;
 
 namespace Wpf.ViewModels
 {
-    public abstract class SearchViewModel : ViewModel
+    public abstract class EditViewModel : ViewModel
     {
-        public SearchViewModel()
+        public EditViewModel()
         {
             Items = new ObservableCollection<ViewModel>();
             SelectedViewModels = new ObservableCollection<ViewModel>();
         }
 
        
-        private ICommandViewModel _searchCommand;
-        public ICommandViewModel SearchCommand
+        private ICommandViewModel _editCommand;
+        public ICommandViewModel EditCommand
         {
             get
             {
-                if (_searchCommand == null)
+                if (_editCommand == null)
                 {
-                    _searchCommand = new SimpleCommandViewModel(
-                        "Suchen", 
-                        "Startet eine Suche", 
-                        Search,
-                        CanSearch);
+                    _editCommand = new SimpleCommandViewModel(
+                        "Edit", 
+                        "Editet", 
+                        Edit,
+                        CanEdit);
                 }
-                return _searchCommand;
+                return _editCommand;
             }
         }
 
-        public abstract void Search();
-        public abstract bool CanSearch();
+        public abstract void Edit();
+        public abstract bool CanEdit();
 
         public abstract GridDisplayConfiguration DisplayedColumns { get; }
 

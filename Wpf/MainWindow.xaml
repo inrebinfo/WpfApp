@@ -7,12 +7,16 @@
         Height="587"
         Width="764">
     <Grid>
-        <TabControl HorizontalAlignment="Left" Height="527" Margin="10,10,0,0" VerticalAlignment="Top" Width="730">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="79*"/>
+            <ColumnDefinition Width="173*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl HorizontalAlignment="Left" Height="527" Margin="0,10,0,0" VerticalAlignment="Top" Width="730" Grid.ColumnSpan="2">
 
 
             <TabItem Header="Kontakte">
                 <DockPanel DataContext="{Binding ContactSearchViewModel}">
-                    <GroupBox DockPanel.Dock="Top" Header="Kundensuche" Width="445" Height="130">
+                    <GroupBox DockPanel.Dock="Top" Header="Kundensuche" Height="130" Margin="10,0">
                         <Grid Margin="10,20,0,0" Width="483">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -34,23 +38,40 @@
                             <Label Grid.Row="2" Grid.Column="0" Content="Firma"/>
                             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding EingabeFirma}"/>
 
-                            <Button Grid.Row="2" Grid.Column="2" Content="Kunde Suchen" Margin="5,0,0,0" Command="{Binding SearchCommand}" />
+                            <Button IsDefault="True" Grid.Row="2" Grid.Column="2" Content="Kunde Suchen" Margin="5,0,0,0" Command="{Binding SearchCommand}" />
                         </Grid>
                     </GroupBox>
-                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Items}" Height="306" Width="671" >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Titel" Binding="{Binding Titel}"/>
-                            <DataGridTextColumn Header="Vorname" Binding="{Binding Vorname}"/>
-                            <DataGridTextColumn Header="Nachname" Binding="{Binding Nachname}" />
-                            <DataGridTextColumn Header="Suffix" Binding="{Binding Suffix}"/>
-                            <DataGridTextColumn Header="Geburtsdatum" Binding="{Binding Geburtsdatum}"/>
-                            <DataGridTextColumn Header="Firma" Binding="{Binding Firmenname}" />
-                            <DataGridTextColumn Header="UID" Binding="{Binding UID}" />
-                            <DataGridTextColumn Header="Strasse" Binding="{Binding Strasse}"/>
-                            <DataGridTextColumn Header="PLZ" Binding="{Binding PLZ}"/>
-                            <DataGridTextColumn Header="Ort" Binding="{Binding Ort}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <ctrls:ListView Height="369" VerticalAlignment="Top" Width="701" ItemsSource="{Binding Items}" SelectedViewModels="{Binding SelectedViewModels}">
+                        <!--
+                        
+        xmlns:i="clr-namespace:System.Windows.Interactivity"
+        xmlns:si="clr-namespace:Expression.Samples.Interactivity"
+                        -->
+                        <!--<i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding Double}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>-->
+                        <!--<ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <EventSetter Event="MouseDoubleClick" Handler="listViewItem_MouseDoubleClick" />
+                            </Style>
+                        </ListView.ItemContainerStyle>-->
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Titel" DisplayMemberBinding="{Binding Titel}"/>
+                                <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Vorname}"/>
+                                <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Nachname}" />
+                                <GridViewColumn Header="Suffix" DisplayMemberBinding="{Binding Suffix}"/>
+                                <GridViewColumn Header="Geburtsdatum" DisplayMemberBinding="{Binding Geburtsdatum}"/>
+                                <GridViewColumn Header="Firma" DisplayMemberBinding="{Binding Firmenname}" />
+                                <GridViewColumn Header="UID" DisplayMemberBinding="{Binding UID}" />
+                                <GridViewColumn Header="Strasse" DisplayMemberBinding="{Binding Strasse}"/>
+                                <GridViewColumn Header="PLZ" DisplayMemberBinding="{Binding PLZ}"/>
+                                <GridViewColumn Header="Ort" DisplayMemberBinding="{Binding Ort}" />
+                            </GridView>
+                        </ListView.View>
+                    </ctrls:ListView>
                 </DockPanel>
             </TabItem>
         </TabControl>

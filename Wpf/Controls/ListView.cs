@@ -43,6 +43,9 @@ namespace Wpf.Controls
 
         public void RefreshGridView(GridDisplayConfiguration cfg)
         {
+            if (cfg == null)
+                return;
+            
             cfg.Columns.CollectionChanged += (s, e) => RefreshGridView(cfg);
 
             GridView view = new GridView() { AllowsColumnReorder = true };
