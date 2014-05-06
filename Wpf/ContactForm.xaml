@@ -3,15 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ContactForm" Height="426.588" Width="839.534">
     <Grid>
-        <GroupBox Header="Firma" Height="97" Width="673" Margin="38,10,38,184">
+        <GroupBox Header="Firma" Height="97" Width="673" Margin="80,222,80,78">
             <Grid Margin="0,0,0,3">
                 <Label Content="Firmenname: " VerticalAlignment="Top" Margin="10,10,0,0"/>
                 <Label Content="UID (opt):" VerticalAlignment="Top" Margin="10,36,0,0"/>
-                <TextBox Name="tboxFirmenname" HorizontalAlignment="Left" Height="23" Margin="92,13,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeFirma}"/>
-                <TextBox Name="tboxUID" HorizontalAlignment="Left" Height="23" Margin="92,39,0,0" VerticalAlignment="Top" Width="559" Text="{Binding UID}"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="92,13,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeFirma}"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="92,39,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeUID}"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Privat" Height="175" Width="672" Margin="39,116,38,0">
+        <GroupBox Header="Privat" Height="175" Width="672" Margin="81,30,79,191">
             <Grid Margin="0,0,0,3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="23*"/>
@@ -22,12 +22,11 @@
                 <Label Content="Nachname:" Margin="10,62,0,0" Grid.ColumnSpan="2"/>
                 <Label Content="Suffix:" Margin="10,88,0,0" Grid.ColumnSpan="2"/>
                 <Label Content="Firma:" Margin="10,114,0,0" Grid.ColumnSpan="2"/>
-                <TextBox Name="tboxTitel" HorizontalAlignment="Left" Height="23" Margin="71,13,0,0" VerticalAlignment="Top" Width="559" Text="{Binding Titel}" Grid.Column="1"/>
-                <TextBox Name="tboxVorname" HorizontalAlignment="Left" Height="23" Margin="71,39,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeVorname}" Grid.Column="1"/>
-                <TextBox Name="tboxNachname" HorizontalAlignment="Left" Height="23" Margin="71,64,0,0" VerticalAlignment="Top" Width="559" Text="{Binding Nachname}" Grid.Column="1"/>
-                <TextBox Name="tboxSuffix" HorizontalAlignment="Left" Height="23" Margin="71,91,0,0" VerticalAlignment="Top" Width="559" Text="{Binding Suffix}" Grid.Column="1"/>
-                <TextBox Name="tboxFirmenlink" HorizontalAlignment="Left" Height="23" Margin="71,119,0,0" VerticalAlignment="Top" Width="471" Text="{Binding SelectedItem.Content, ElementName=lboxFirmensuche}" Grid.Column="1"/>
-                <Button Content="Löschen" Margin="547,120,10,8" Grid.Column="1"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="71,13,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeTitel}" Grid.Column="1"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="71,39,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeVorname}" Grid.Column="1"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="71,64,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeNachname}" Grid.Column="1"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="71,91,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeSuffix}" Grid.Column="1"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="71,119,0,0" VerticalAlignment="Top" Width="471" Text="{Binding EingabeFirma}" Grid.Column="1"/>
             </Grid>
         </GroupBox>
     </Grid>

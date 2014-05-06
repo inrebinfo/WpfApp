@@ -17,7 +17,7 @@
             <TabItem Header="Kontakte">
                 <DockPanel DataContext="{Binding ContactSearchViewModel}">
                     <GroupBox DockPanel.Dock="Top" Header="Kundensuche" Height="130" Margin="10,0">
-                        <Grid Margin="10,20,0,0" Width="483">
+                        <Grid Margin="110,10,100,10" Width="483" RenderTransformOrigin="0.489,0.625">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -29,16 +29,16 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" Content="Vorname"/>
-                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding EingabeVorname}"/>
+                            <Label Grid.Row="0" Grid.Column="0" Content="Suchtext" Margin="-5,22,5,0" Grid.RowSpan="3"/>
+                            <TextBox Grid.Row="2" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="55,10,0,0" Grid.ColumnSpan="2"/>
 
-                            <Label Grid.Row="1" Grid.Column="0" Content="Nachname"/>
+                            <!--<Label Grid.Row="1" Grid.Column="0" Content="Nachname"/>
                             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding EingabeNachname}"/>
 
                             <Label Grid.Row="2" Grid.Column="0" Content="Firma"/>
-                            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding EingabeFirma}"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding EingabeFirma}" IsEnabled="{Binding FirmaIsEnabled}"/>-->
 
-                            <Button IsDefault="True" Grid.Row="2" Grid.Column="2" Content="Kunde Suchen" Margin="5,0,0,0" Command="{Binding SearchCommand}" />
+                            <Button IsDefault="True" Grid.Row="2" Grid.Column="2" Content="Kunde Suchen" Margin="23,2,-18,-2" Command="{Binding SearchCommand}" />
                         </Grid>
                     </GroupBox>
                     <ctrls:ListView Height="369" VerticalAlignment="Top" Width="701" ItemsSource="{Binding Items}" SelectedViewModels="{Binding SelectedViewModels}">
@@ -59,16 +59,16 @@
                         </ListView.ItemContainerStyle>-->
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Titel" DisplayMemberBinding="{Binding Titel}"/>
-                                <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Vorname}"/>
-                                <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Nachname}" />
-                                <GridViewColumn Header="Suffix" DisplayMemberBinding="{Binding Suffix}"/>
-                                <GridViewColumn Header="Geburtsdatum" DisplayMemberBinding="{Binding Geburtsdatum}"/>
-                                <GridViewColumn Header="Firma" DisplayMemberBinding="{Binding Firmenname}" />
-                                <GridViewColumn Header="UID" DisplayMemberBinding="{Binding UID}" />
-                                <GridViewColumn Header="Strasse" DisplayMemberBinding="{Binding Strasse}"/>
-                                <GridViewColumn Header="PLZ" DisplayMemberBinding="{Binding PLZ}"/>
-                                <GridViewColumn Header="Ort" DisplayMemberBinding="{Binding Ort}" />
+                                <GridViewColumn Header="Titel" DisplayMemberBinding="{Binding Titel}" Width="35"/>
+                                <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Vorname}" Width="100"/>
+                                <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Nachname}" Width="100"/>
+                                <GridViewColumn Header="Suffix" DisplayMemberBinding="{Binding Suffix}" Width="50"/>
+                                <GridViewColumn Header="Geburtsdatum" DisplayMemberBinding="{Binding Geburtsdatum}" Width="100"/>
+                                <GridViewColumn Header="Firma" DisplayMemberBinding="{Binding Firmenname}" Width="50"/>
+                                <GridViewColumn Header="UID" DisplayMemberBinding="{Binding UID}" Width="75"/>
+                                <GridViewColumn Header="Strasse" DisplayMemberBinding="{Binding Strasse}" Width="50"/>
+                                <GridViewColumn Header="PLZ" DisplayMemberBinding="{Binding PLZ}" Width="50"/>
+                                <GridViewColumn Header="Ort" DisplayMemberBinding="{Binding Ort}" Width="75"/>
                             </GridView>
                         </ListView.View>
                     </ctrls:ListView>

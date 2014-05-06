@@ -19,15 +19,15 @@ namespace Wpf
         public ContactObject contact = new ContactObject();
 
 
-        
 
         public Proxy()
         {
-            AddContacts();
+
         }
-        public void AddContacts()
+
+        public void SearchContacts(string searchParam)
         {
-            string postData = "mode=search&searchstring=u";
+            string postData = "mode=search&searchstring=" + searchParam;
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
 
 
@@ -45,7 +45,7 @@ namespace Wpf
             dataStream = response.GetResponseStream();
             StreamReader reader = new StreamReader(dataStream);
             string responseFromServer = reader.ReadToEnd();
-            MessageBox.Show(responseFromServer);
+            //MessageBox.Show(responseFromServer);
             reader.Close();
             dataStream.Close();
             response.Close();
