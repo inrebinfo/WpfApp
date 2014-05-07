@@ -61,6 +61,9 @@
       <DependentUpon>AddZeile.xaml</DependentUpon>
     </Compile>
     <Compile Include="CommonExtensions.cs" />
+    <Compile Include="CompanySearch.xaml.cs">
+      <DependentUpon>CompanySearch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ContactForm.xaml.cs">
       <DependentUpon>ContactForm.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,7 @@
     <Compile Include="ViewModels\ContactViewModel.cs" />
     <Compile Include="ViewModels\InvoiceSearchViewModel.cs" />
     <Compile Include="ViewModels\EditViewModel.cs" />
+    <Compile Include="ViewModels\CompanySearchViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\Samples\KundenViewModel.cs" />
     <Compile Include="ViewModels\Samples\OwnControlsViewModel.cs" />
@@ -129,6 +133,10 @@
     <Page Include="AddZeile.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CompanySearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ContactForm.xaml">
       <SubType>Designer</SubType>

@@ -70,6 +70,7 @@ namespace Wpf.ViewModels
                 _contactEditViewModel.EingabeStrasse = s.Strasse;
                 _contactEditViewModel.EingabePLZ = s.PLZ;
                 _contactEditViewModel.EingabeOrt = s.Ort;
+                _contactEditViewModel._isEdit = true;
 
                 ContactForm form = new ContactForm(_contactEditViewModel);
                 form.Show();
@@ -82,7 +83,7 @@ namespace Wpf.ViewModels
         {
             //OnPropertyChanged("IsFirma");
             //OnPropertyChanged("CanEditPerson");
-            OnPropertyChanged("FirmaIsEnabled");
+            OnPropertyChanged("SearchText");
         }
 
         private string _searchText;

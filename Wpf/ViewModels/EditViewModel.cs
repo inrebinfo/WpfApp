@@ -32,6 +32,26 @@ namespace Wpf.ViewModels
             }
         }
 
+        private ICommandViewModel _searchCommand;
+        public ICommandViewModel SearchCommand
+        {
+            get
+            {
+                if (_searchCommand == null)
+                {
+                    _searchCommand = new SimpleCommandViewModel(
+                        "Suche",
+                        "Sucht",
+                        Search,
+                        CanSearch);
+                }
+                return _searchCommand;
+            }
+        }
+
+        public abstract void Search();
+        public abstract bool CanSearch();
+
         public abstract void Edit();
         public abstract bool CanEdit();
 

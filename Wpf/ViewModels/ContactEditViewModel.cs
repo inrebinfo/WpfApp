@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace Wpf.ViewModels
 {
     public class ContactEditViewModel : EditViewModel
     {
 
+        private int _companyID;
+        public bool _isEdit { get; set; }
+
         public override void Edit()
         {
-            
+            MessageBox.Show("edit");
         }
 
         public override bool CanEdit()
@@ -20,12 +24,62 @@ namespace Wpf.ViewModels
                 || !string.IsNullOrWhiteSpace(EingabeFirma);
         }
 
+        public override void Search()
+        {
+            //firmensuche
+            Proxy prox = new Proxy();
+            prox.SearchCompany(EingabeFirmaKunde);
+            var result = prox.getList;
+
+            this.Items.Clear();
+
+            if (result.Count == 1)
+            {
+                _companyID = Convert.ToInt32(result[0].ID);
+                MessageBox.Show("genau 1");
+            }
+            else if (result.Count > 1)
+            {
+                CompanySearch wnd = new CompanySearch(result, this);
+                wnd.Show();
+                MessageBox.Show("mehrere");
+            }
+            else
+            {
+                MessageBox.Show("keine");
+            }
+
+            /*foreach (var item in result)
+            {
+                this.Items.Add(new ContactViewModel(item));
+            }*/
+        }
+
+        public override bool CanSearch()
+        {
+            /*return !string.IsNullOrWhiteSpace(EingabeVorname)
+                || !string.IsNullOrWhiteSpace(EingabeNachname)
+                || !string.IsNullOrWhiteSpace(EingabeFirma);*/
+            return true;
+        }
+
         public override GridDisplayConfiguration DisplayedColumns
         {
             get { return null; }
         }
 
+        public void NotifyStateChanged()
+        {
+            OnPropertyChanged("EingabeFirmaKunde");
+        }
 
+        public void ReceiveCompany(ContactViewModel model)
+        {
+            EingabeFirmaKunde = model.Firma;
+            _companyID = Convert.ToInt32(model.ID);
+        }
+
+        #region input properties
         private string _eingabeVorname;
         public string EingabeVorname
         {
@@ -76,6 +130,25 @@ namespace Wpf.ViewModels
                     _eingabeFirma = value;
                     EditCommand.OnCanExecuteChanged();
                     OnPropertyChanged("EingabeFirma");
+                }
+            }
+        }
+
+        private string _eingabeFirmaKunde;
+        public string EingabeFirmaKunde
+        {
+            get
+            {
+                return _eingabeFirmaKunde;
+            }
+            set
+            {
+                if (_eingabeFirmaKunde != value)
+                {
+                    _eingabeFirmaKunde = value;
+                    EditCommand.OnCanExecuteChanged();
+                    NotifyStateChanged();
+                    OnPropertyChanged("EingabeFirmaKunde");
                 }
             }
         }
@@ -206,5 +279,6 @@ namespace Wpf.ViewModels
             }
         }
 
+        #endregion
     }
 }

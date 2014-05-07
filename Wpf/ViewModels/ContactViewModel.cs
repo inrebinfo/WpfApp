@@ -7,6 +7,23 @@ namespace Wpf.ViewModels
 {
     public class ContactViewModel : ViewModel
     {
+        private string _id;
+        public string ID
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    _id = value;
+                    OnPropertyChanged("ID");
+                }
+            }
+        }
+
         private string _vorname;
         public string Vorname
         {
@@ -177,6 +194,23 @@ namespace Wpf.ViewModels
             }
         }
 
+        private string _fk_kontakt;
+        public string FK_Kontakt
+        {
+            get
+            {
+                return _fk_kontakt;
+            }
+            set
+            {
+                if (_fk_kontakt != value)
+                {
+                    _fk_kontakt = value;
+                    OnPropertyChanged("FK_Kontakt");
+                }
+            }
+        }
+
         
 
         private ContactObject item;
@@ -186,6 +220,7 @@ namespace Wpf.ViewModels
             // TODO: Complete member initialization
             this.item = item;
 
+            _id = item.ID;
             _firma = item.Firmenname;
             _vorname = item.Vorname;
             _nachname = item.Nachname;
@@ -196,6 +231,7 @@ namespace Wpf.ViewModels
             _strasse = item.Strasse;
             _plz = item.PLZ;
             _ort = item.Ort;
+            _fk_kontakt = item.FK_Kontakt;
         }
 
         /// <summary>
