@@ -37,6 +37,15 @@ namespace Wpf.ViewModels
             return true;
         }
 
+        public override void NewContactWindow()
+        {
+        }
+
+        public override bool CanNewContactWindow()
+        {
+            return true;
+        }
+
         public override GridDisplayConfiguration DisplayedColumns
         {
             get { return null; }

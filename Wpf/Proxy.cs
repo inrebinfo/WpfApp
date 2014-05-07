@@ -95,6 +95,72 @@ namespace Wpf
 
         }
 
+        public void SaveContact(ContactObject contact, bool edit)
+        {
+            if (edit == true)
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(ContactObject));
+
+                byte[] respBytes;
+
+                StringWriter textWriter = new StringWriter();
+
+                MemoryStream memstream = new MemoryStream();
+                serializer.Serialize(textWriter, contact);
+
+                string rsp = textWriter.ToString();
+
+                string base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(rsp));
+
+                string count = base64.Count(x => x == '=').ToString();
+
+                string postData = "mode=update&toadd="+count+"&contact=" + base64;
+
+                byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+
+                WebRequest req = WebRequest.Create("http://localhost:8080/MicroERP.html");
+                req.Method = "POST";
+
+                req.ContentType = "application/x-www-form-urlencoded";
+                req.ContentLength = byteArray.Length;
+
+                Stream dataStream = req.GetRequestStream();
+                dataStream.Write(byteArray, 0, byteArray.Length);
+                dataStream.Close();
+            }
+            else
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(ContactObject));
+
+                byte[] respBytes;
+
+                StringWriter textWriter = new StringWriter();
+
+                MemoryStream memstream = new MemoryStream();
+                serializer.Serialize(textWriter, contact);
+
+                string rsp = textWriter.ToString();
+
+                string base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(rsp));
+
+                string count = base64.Count(x => x == '=').ToString();
+
+                string postData = "mode=insert&toadd=" + count + "&contact=" + base64;
+
+                byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+
+                WebRequest req = WebRequest.Create("http://localhost:8080/MicroERP.html");
+                req.Method = "POST";
+
+                req.ContentType = "application/x-www-form-urlencoded";
+                req.ContentLength = byteArray.Length;
+
+                Stream dataStream = req.GetRequestStream();
+                dataStream.Write(byteArray, 0, byteArray.Length);
+                dataStream.Close();
+            }
+        }
+
         public ContactObject getContact
         {
             get

@@ -14,6 +14,7 @@ namespace Wpf.ViewModels
 
         private ContactEditViewModel _contactEditViewModel;
 
+
         public ContactSearchViewModel()
         {
             Items = new ObservableCollection<ViewModel>();
@@ -38,9 +39,22 @@ namespace Wpf.ViewModels
         public override bool CanSearch()
         {
             return !string.IsNullOrWhiteSpace(SearchText);
-            //return !string.IsNullOrWhiteSpace(EingabeVorname)
-            //    || !string.IsNullOrWhiteSpace(EingabeNachname)
-            //    || !string.IsNullOrWhiteSpace(EingabeFirma);
+        }
+
+        public override void NewContactWindow()
+        {
+            _contactEditViewModel = new ContactEditViewModel();
+
+            
+            _contactEditViewModel._isEdit = false;
+
+            ContactForm form = new ContactForm(_contactEditViewModel);
+            form.Show();
+        }
+
+        public override bool CanNewContactWindow()
+        {
+            return true;
         }
 
         public override GridDisplayConfiguration DisplayedColumns
@@ -60,6 +74,7 @@ namespace Wpf.ViewModels
 
                 _contactEditViewModel = new ContactEditViewModel();
 
+                _contactEditViewModel.ID = s.ID;
                 _contactEditViewModel.EingabeFirma = s.Firma;
                 _contactEditViewModel.EingabeTitel = s.Titel;
                 _contactEditViewModel.EingabeVorname = s.Vorname;

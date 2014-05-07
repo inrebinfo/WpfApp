@@ -21,5 +21,14 @@ namespace Wpf.ViewModels
         {
             throw new NotImplementedException();
         }
+
+        public override void NewContactWindow()
+        {
+        }
+
+        public override bool CanNewContactWindow()
+        {
+            return true;
+        }
     }
 }

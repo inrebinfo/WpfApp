@@ -4,60 +4,21 @@
         xmlns:ctrls="clr-namespace:Wpf.Controls"
         xmlns:vmdl="clr-namespace:Wpf.ViewModels"
         Title="SWE 2 - Wpf Samples"
-        Height="587"
-        Width="764">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="79*"/>
-            <ColumnDefinition Width="173*"/>
-        </Grid.ColumnDefinitions>
-        <TabControl HorizontalAlignment="Left" Height="527" Margin="0,10,0,0" VerticalAlignment="Top" Width="730" Grid.ColumnSpan="2">
-
-
+        Height="712"
+        Width="982">
+    <Grid Margin="0,0,0,0">
+        <TabControl Margin="10">
             <TabItem Header="Kontakte">
-                <DockPanel DataContext="{Binding ContactSearchViewModel}">
+                <DockPanel DataContext="{Binding ContactSearchViewModel}" Margin="10,3,7,5">
                     <GroupBox DockPanel.Dock="Top" Header="Kundensuche" Height="130" Margin="10,0">
-                        <Grid Margin="110,10,100,10" Width="483" RenderTransformOrigin="0.489,0.625">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="110" />
-                                <ColumnDefinition Width="Auto" MinWidth="200" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <Label Grid.Row="0" Grid.Column="0" Content="Suchtext" Margin="-5,22,5,0" Grid.RowSpan="3"/>
-                            <TextBox Grid.Row="2" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="55,10,0,0" Grid.ColumnSpan="2"/>
-
-                            <!--<Label Grid.Row="1" Grid.Column="0" Content="Nachname"/>
-                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding EingabeNachname}"/>
-
-                            <Label Grid.Row="2" Grid.Column="0" Content="Firma"/>
-                            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding EingabeFirma}" IsEnabled="{Binding FirmaIsEnabled}"/>-->
-
-                            <Button IsDefault="True" Grid.Row="2" Grid.Column="2" Content="Kunde Suchen" Margin="23,2,-18,-2" Command="{Binding SearchCommand}" />
+                        <Grid Margin="54,19,290,1" Width="483">
+                            <Label Grid.Row="0" Grid.Column="0" Content="Suchtext" Margin="-38,19,445,34"/>
+                            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="71,10,35,45"/>
+                            <Button IsDefault="True" Content="Kunde Suchen" Margin="500,-8,-159,45" Command="{Binding SearchCommand}" />
                         </Grid>
                     </GroupBox>
-                    <ctrls:ListView Height="369" VerticalAlignment="Top" Width="701" ItemsSource="{Binding Items}" SelectedViewModels="{Binding SelectedViewModels}">
-                        <!--
-                        
-        xmlns:i="clr-namespace:System.Windows.Interactivity"
-        xmlns:si="clr-namespace:Expression.Samples.Interactivity"
-                        -->
-                        <!--<i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseDoubleClick">
-                                <i:InvokeCommandAction Command="{Binding Double}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>-->
-                        <!--<ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <EventSetter Event="MouseDoubleClick" Handler="listViewItem_MouseDoubleClick" />
-                            </Style>
-                        </ListView.ItemContainerStyle>-->
-                        <ListView.View>
+                    <ctrls:ListView Height="369" ItemsSource="{Binding Items}" SelectedViewModels="{Binding SelectedViewModels}" DockPanel.Dock="Top" Margin="0,0,39,0">
+                        <ctrls:ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Titel" DisplayMemberBinding="{Binding Titel}" Width="35"/>
                                 <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Vorname}" Width="100"/>
@@ -70,8 +31,9 @@
                                 <GridViewColumn Header="PLZ" DisplayMemberBinding="{Binding PLZ}" Width="50"/>
                                 <GridViewColumn Header="Ort" DisplayMemberBinding="{Binding Ort}" Width="75"/>
                             </GridView>
-                        </ListView.View>
+                        </ctrls:ListView.View>
                     </ctrls:ListView>
+                    <Button Content="New Contact" Height="50" Command="{Binding NewContactCommand}" DockPanel.Dock="Bottom" Margin="0,0,740,0"/>
                 </DockPanel>
             </TabItem>
         </TabControl>

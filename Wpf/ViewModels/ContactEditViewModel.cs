@@ -11,10 +11,32 @@ namespace Wpf.ViewModels
 
         private int _companyID;
         public bool _isEdit { get; set; }
+        private Window _wnd;
+
+        
 
         public override void Edit()
         {
-            MessageBox.Show("edit");
+            //MessageBox.Show("edit");
+
+            ContactObject contactToSave = new ContactObject();
+
+            contactToSave.ID = ID;
+            contactToSave.Vorname = EingabeVorname;
+            contactToSave.Nachname = EingabeNachname;
+            contactToSave.Titel = EingabeTitel;
+            contactToSave.Suffix = EingabeSuffix;
+            contactToSave.Strasse = EingabeStrasse;
+            contactToSave.PLZ = EingabePLZ;
+            contactToSave.Ort = EingabeOrt;
+            contactToSave.Firmenname = EingabeFirma;
+            contactToSave.UID = EingabeUID;
+            contactToSave.FK_Kontakt = _companyID.ToString();
+
+            Proxy prox = new Proxy();
+            prox.SaveContact(contactToSave, _isEdit);
+
+            //_wnd.Close();
         }
 
         public override bool CanEdit()
@@ -80,6 +102,25 @@ namespace Wpf.ViewModels
         }
 
         #region input properties
+
+        private string _id;
+        public string ID
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    _id = value;
+                    EditCommand.OnCanExecuteChanged();
+                    OnPropertyChanged("ID");
+                }
+            }
+        }
+
         private string _eingabeVorname;
         public string EingabeVorname
         {

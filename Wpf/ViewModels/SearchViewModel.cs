@@ -14,7 +14,7 @@ namespace Wpf.ViewModels
             SelectedViewModels = new ObservableCollection<ViewModel>();
         }
 
-       
+
         private ICommandViewModel _searchCommand;
         public ICommandViewModel SearchCommand
         {
@@ -23,8 +23,8 @@ namespace Wpf.ViewModels
                 if (_searchCommand == null)
                 {
                     _searchCommand = new SimpleCommandViewModel(
-                        "Suchen", 
-                        "Startet eine Suche", 
+                        "Suchen",
+                        "Startet eine Suche",
                         Search,
                         CanSearch);
                 }
@@ -32,8 +32,28 @@ namespace Wpf.ViewModels
             }
         }
 
+        private ICommandViewModel _newContactCommand;
+        public ICommandViewModel NewContactCommand
+        {
+            get
+            {
+                if (_newContactCommand == null)
+                {
+                    _newContactCommand = new SimpleCommandViewModel(
+                        "Suchen",
+                        "Startet eine Suche",
+                        NewContactWindow,
+                        CanNewContactWindow);
+                }
+                return _newContactCommand;
+            }
+        }
+
         public abstract void Search();
         public abstract bool CanSearch();
+
+        public abstract void NewContactWindow();
+        public abstract bool CanNewContactWindow();
 
         public abstract GridDisplayConfiguration DisplayedColumns { get; }
 
