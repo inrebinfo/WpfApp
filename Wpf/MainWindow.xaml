@@ -25,7 +25,7 @@
                                 <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Nachname}" Width="100"/>
                                 <GridViewColumn Header="Suffix" DisplayMemberBinding="{Binding Suffix}" Width="50"/>
                                 <GridViewColumn Header="Geburtsdatum" DisplayMemberBinding="{Binding Geburtsdatum}" Width="100"/>
-                                <GridViewColumn Header="Firma" DisplayMemberBinding="{Binding Firmenname}" Width="50"/>
+                                <GridViewColumn Header="Firma" DisplayMemberBinding="{Binding Firma}" Width="50"/>
                                 <GridViewColumn Header="UID" DisplayMemberBinding="{Binding UID}" Width="75"/>
                                 <GridViewColumn Header="Strasse" DisplayMemberBinding="{Binding Strasse}" Width="50"/>
                                 <GridViewColumn Header="PLZ" DisplayMemberBinding="{Binding PLZ}" Width="50"/>

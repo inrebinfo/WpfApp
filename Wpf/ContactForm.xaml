@@ -7,48 +7,48 @@
             <RowDefinition Height="469*"/>
             <RowDefinition Height="213*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Firma" Margin="79,228,80,143">
+        <GroupBox Header="Firma" Margin="10,336,111,35">
             <Grid Margin="0,0,0,3">
                 <Label Content="Firmenname: " VerticalAlignment="Top" Margin="10,10,574,0"/>
                 <Label Content="UID (opt):" VerticalAlignment="Top" Margin="10,36,574,0"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="92,13,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeFirma}"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="92,39,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeUID}"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="117,13,0,0" VerticalAlignment="Top" Width="572" Text="{Binding EingabeFirma}"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="117,39,0,0" VerticalAlignment="Top" Width="572" Text="{Binding EingabeUID}"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Privat" Margin="80,16,80,246">
+        <GroupBox Header="Privat" Margin="10,10,111,147">
             <Grid Margin="0,0,0,3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="23*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Titel:" Margin="10,10,578,144"/>
-                <Label Content="Vorname:" Margin="10,38,578,115"/>
-                <Label Content="Nachname:" Margin="10,67,578,87"/>
-                <Label Content="Suffix:" Margin="10,95,578,61"/>
-                <Label Content="Firma:" Margin="10,123,578,30"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="87,11,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeTitel}"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="87,37,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeVorname}"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="87,62,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeNachname}"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="87,89,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeSuffix}"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="87,117,0,0" VerticalAlignment="Top" Width="471" Text="{Binding EingabeFirmaKunde, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="Titel:" Margin="10,10,578,211"/>
+                <Label Content="Vorname:" Margin="10,50,578,169"/>
+                <Label Content="Nachname:" Margin="9,93,579,127"/>
+                <Label Content="Suffix:" Margin="10,134,578,86"/>
+                <Label Content="Firma:" Margin="10,168,578,54"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="87,14,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeTitel}"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="87,54,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeVorname}"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="86,96,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeNachname}"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="87,137,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeSuffix}"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="87,171,0,0" VerticalAlignment="Top" Width="471" Text="{Binding EingabeFirmaKunde, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <Button IsDefault="True" Content="Suche" Margin="563,117,14,42" Command="{Binding SearchCommand}"/>
-                <Label Content="Geburtstag:" Margin="10,154,578,0"/>
-                <DatePicker HorizontalAlignment="Left" Margin="87,155,0,0" VerticalAlignment="Top" Width="234"/>
+                <Button IsDefault="True" Content="Suche" Margin="563,171,14,86" Command="{Binding SearchCommand}"/>
+                <Label Content="Geburtstag:" Margin="9,205,579,17"/>
+                <DatePicker HorizontalAlignment="Left" Margin="98,206,0,0" VerticalAlignment="Top" Width="234" Height="25"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Adresse" HorizontalAlignment="Left" Margin="80,331,0,179" Width="672" Grid.RowSpan="2">
+        <GroupBox Header="Adresse" Margin="10,458,150,90" Width="672" Grid.RowSpan="2">
             <Grid Margin="0,0,0,3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="23*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Strasse" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="63"/>
-                <Label Margin="0,34,0,0" Content="PLZ" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="64"/>
-                <Label Margin="0,68,0,0" Content="Ort" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="63"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="63,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" Text="{Binding EingabeStrasse}"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="63,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" Text="{Binding EingabePLZ}"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="63,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="239" Text="{Binding EingabeOrt}"/>
+                <Label Content="Strasse" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="63" Margin="0,6,0,0"/>
+                <Label Margin="0,40,0,0" Content="PLZ" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="64"/>
+                <Label Margin="0,79,0,0" Content="Ort" HorizontalAlignment="Left" Height="34" VerticalAlignment="Top" Width="63"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="63,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="587" Text="{Binding EingabeStrasse}"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="63,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="587" Text="{Binding EingabePLZ}"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="68,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="582" Text="{Binding EingabeOrt}"/>
             </Grid>
         </GroupBox>
-        <Button Content="Speichern" HorizontalAlignment="Left" Margin="637,67,0,0" VerticalAlignment="Top" Width="75" Height="41" Command="{Binding EditCommand}" Grid.Row="1"/>
+        <Button Content="Speichern" HorizontalAlignment="Left" Margin="607,128,0,0" VerticalAlignment="Top" Width="75" Height="41" Command="{Binding EditCommand}" Grid.Row="1"/>
     </Grid>
 </Window>

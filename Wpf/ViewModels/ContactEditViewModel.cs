@@ -58,6 +58,7 @@ namespace Wpf.ViewModels
             if (result.Count == 1)
             {
                 _companyID = Convert.ToInt32(result[0].ID);
+                EingabeFirmaKunde = result[0].Firmenname;
                 MessageBox.Show("genau 1");
             }
             else if (result.Count > 1)
@@ -70,11 +71,6 @@ namespace Wpf.ViewModels
             {
                 MessageBox.Show("keine");
             }
-
-            /*foreach (var item in result)
-            {
-                this.Items.Add(new ContactViewModel(item));
-            }*/
         }
 
         public override bool CanSearch()
@@ -100,6 +96,9 @@ namespace Wpf.ViewModels
             EingabeFirmaKunde = model.Firma;
             _companyID = Convert.ToInt32(model.ID);
         }
+
+        // firma (Selbst) firmenzuweisung richtig setzen/filtern
+        // deaktivieren properties
 
         #region input properties
 
