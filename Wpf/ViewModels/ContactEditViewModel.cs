@@ -88,7 +88,10 @@ namespace Wpf.ViewModels
 
         public void NotifyStateChanged()
         {
-            OnPropertyChanged("EingabeFirmaKunde");
+            //OnPropertyChanged("EingabeFirmaKunde");
+            OnPropertyChanged("IsFirma");
+            OnPropertyChanged("CanEditFirma");
+            OnPropertyChanged("CanEditPerson");
         }
 
         public void ReceiveCompany(ContactViewModel model)
@@ -99,6 +102,36 @@ namespace Wpf.ViewModels
 
         // firma (Selbst) firmenzuweisung richtig setzen/filtern
         // deaktivieren properties
+
+        public bool? IsFirma
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(EingabeNachname) && string.IsNullOrWhiteSpace(EingabeVorname) && string.IsNullOrWhiteSpace(EingabeFirma))
+                    return null;
+
+                return !string.IsNullOrWhiteSpace(EingabeFirma);
+            }
+        }
+
+        /// <summary>
+        /// Enable or Disable Groupbox
+        /// </summary>
+        public bool CanEditPerson
+        {
+            get
+            {
+                return IsFirma == null || IsFirma == false;
+            }
+        }
+
+        public bool CanEditFirma
+        {
+            get
+            {
+                return IsFirma == null || IsFirma == true;
+            }
+        }
 
         #region input properties
 
@@ -116,6 +149,7 @@ namespace Wpf.ViewModels
                     _id = value;
                     EditCommand.OnCanExecuteChanged();
                     OnPropertyChanged("ID");
+                    NotifyStateChanged();
                 }
             }
         }
@@ -132,8 +166,9 @@ namespace Wpf.ViewModels
                 if (_eingabeVorname != value)
                 {
                     _eingabeVorname = value;
-                    EditCommand.OnCanExecuteChanged();
                     OnPropertyChanged("EingabeVorname");
+                    NotifyStateChanged();
+                    EditCommand.OnCanExecuteChanged();
                 }
             }
         }
@@ -150,8 +185,9 @@ namespace Wpf.ViewModels
                 if (_eingabeNachname != value)
                 {
                     _eingabeNachname = value;
-                    EditCommand.OnCanExecuteChanged();
                     OnPropertyChanged("EingabeNachname");
+                    NotifyStateChanged();
+                    EditCommand.OnCanExecuteChanged();
                 }
             }
         }
@@ -168,8 +204,9 @@ namespace Wpf.ViewModels
                 if (_eingabeFirma != value)
                 {
                     _eingabeFirma = value;
-                    EditCommand.OnCanExecuteChanged();
                     OnPropertyChanged("EingabeFirma");
+                    NotifyStateChanged();
+                    EditCommand.OnCanExecuteChanged();
                 }
             }
         }
@@ -187,8 +224,8 @@ namespace Wpf.ViewModels
                 {
                     _eingabeFirmaKunde = value;
                     EditCommand.OnCanExecuteChanged();
-                    NotifyStateChanged();
                     OnPropertyChanged("EingabeFirmaKunde");
+                    NotifyStateChanged();
                 }
             }
         }
@@ -207,6 +244,7 @@ namespace Wpf.ViewModels
                     _eingabeTitel = value;
                     EditCommand.OnCanExecuteChanged();
                     OnPropertyChanged("EingabeTitel");
+                    NotifyStateChanged();
                 }
             }
         }
@@ -225,6 +263,7 @@ namespace Wpf.ViewModels
                     _eingabeSuffix = value;
                     EditCommand.OnCanExecuteChanged();
                     OnPropertyChanged("EingabeSuffix");
+                    NotifyStateChanged();
                 }
             }
         }
@@ -243,6 +282,7 @@ namespace Wpf.ViewModels
                     _eingabeGeburtstag = value;
                     EditCommand.OnCanExecuteChanged();
                     OnPropertyChanged("EingabeGeburtstag");
+                    NotifyStateChanged();
                 }
             }
         }
@@ -261,6 +301,7 @@ namespace Wpf.ViewModels
                     _eingabeUID = value;
                     EditCommand.OnCanExecuteChanged();
                     OnPropertyChanged("EingabeUID");
+                    NotifyStateChanged();
                 }
             }
         }
@@ -279,6 +320,7 @@ namespace Wpf.ViewModels
                     _eingabeStrasse = value;
                     EditCommand.OnCanExecuteChanged();
                     OnPropertyChanged("EingabeStrasse");
+                    NotifyStateChanged();
                 }
             }
         }
@@ -297,6 +339,7 @@ namespace Wpf.ViewModels
                     _eingabePLZ = value;
                     EditCommand.OnCanExecuteChanged();
                     OnPropertyChanged("EingabePLZ");
+                    NotifyStateChanged();
                 }
             }
         }
@@ -315,6 +358,7 @@ namespace Wpf.ViewModels
                     _eingabeOrt = value;
                     EditCommand.OnCanExecuteChanged();
                     OnPropertyChanged("EingabeOrt");
+                    NotifyStateChanged();
                 }
             }
         }

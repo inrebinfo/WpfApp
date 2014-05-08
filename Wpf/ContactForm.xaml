@@ -7,15 +7,15 @@
             <RowDefinition Height="469*"/>
             <RowDefinition Height="213*"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Firma" Margin="10,336,111,35">
+        <GroupBox Header="Firma" Margin="10,336,111,35" IsEnabled="{Binding CanEditFirma}">
             <Grid Margin="0,0,0,3">
                 <Label Content="Firmenname: " VerticalAlignment="Top" Margin="10,10,574,0"/>
                 <Label Content="UID (opt):" VerticalAlignment="Top" Margin="10,36,574,0"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="117,13,0,0" VerticalAlignment="Top" Width="572" Text="{Binding EingabeFirma}"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="117,13,0,0" VerticalAlignment="Top" Width="572" Text="{Binding EingabeFirma, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBox HorizontalAlignment="Left" Height="23" Margin="117,39,0,0" VerticalAlignment="Top" Width="572" Text="{Binding EingabeUID}"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Privat" Margin="10,10,111,147">
+        <GroupBox Header="Privat" Margin="10,10,111,147" IsEnabled="{Binding CanEditPerson}">
             <Grid Margin="0,0,0,3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="23*"/>
@@ -26,8 +26,8 @@
                 <Label Content="Suffix:" Margin="10,134,578,86"/>
                 <Label Content="Firma:" Margin="10,168,578,54"/>
                 <TextBox HorizontalAlignment="Left" Height="23" Margin="87,14,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeTitel}"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="87,54,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeVorname}"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="86,96,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeNachname}"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="87,54,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeVorname, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="86,96,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeNachname, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBox HorizontalAlignment="Left" Height="23" Margin="87,137,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeSuffix}"/>
                 <TextBox HorizontalAlignment="Left" Height="23" Margin="87,171,0,0" VerticalAlignment="Top" Width="471" Text="{Binding EingabeFirmaKunde, UpdateSourceTrigger=PropertyChanged}"/>
 
