@@ -11,7 +11,7 @@ namespace WpfApp.Test
         [TestMethod]
         public void FirstnamePropertyCorrectParsedTest()
         {
-            ContactEditViewModel model = new ContactEditViewModel();
+            InvoiceEditViewModel model = new InvoiceEditViewModel();
 
             string toCheck = "Kurt";
             model.EingabeVorname = "Kurt";

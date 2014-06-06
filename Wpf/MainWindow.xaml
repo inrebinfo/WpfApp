@@ -36,6 +36,39 @@
                     <Button Content="New Contact" Height="50" Command="{Binding NewContactCommand}" DockPanel.Dock="Bottom" Margin="0,0,740,0"/>
                 </DockPanel>
             </TabItem>
+            <TabItem Header="Rechnung">
+                <DockPanel DataContext="{Binding InvoiceSearchViewModel}" Margin="10,3,7,5">
+                    <GroupBox DockPanel.Dock="Top" Header="Kundensuche" Height="191" Margin="10,0">
+                        <Grid Margin="54,19,290,1" Width="483">
+                            <Label Grid.Row="0" Grid.Column="0" Content="Kunde" Margin="-82,-8,489,122"/>
+                            <TextBox Text="{Binding EingabeKunde, UpdateSourceTrigger=PropertyChanged}" Margin="0,-8,221,120"/>
+                            <Button IsDefault="True" Content="Rechnung Suchen" Margin="541,20,-200,17" Command="{Binding SearchCommand}" />
+                            <Label Grid.Row="0" Grid.Column="0" Content="von" Margin="-82,32,489,75"/>
+
+                            <DatePicker HorizontalAlignment="Left" SelectedDate="{Binding DatumVon}" Margin="0,34,0,0" VerticalAlignment="Top" Width="160" Height="25"/>
+                            <DatePicker HorizontalAlignment="Left" SelectedDate="{Binding DatumBis}"  Margin="293,34,0,0" VerticalAlignment="Top" Width="160" Height="25"/>
+                            <Label Grid.Row="0" Grid.Column="0" Content="bis" Margin="186,32,221,75"/>
+                            <Label Grid.Row="0" Grid.Column="0" Content="Betrag von" Margin="-83,81,490,33"/>
+                            <TextBox Text="{Binding PreisVon, UpdateSourceTrigger=PropertyChanged}" Margin="-1,81,412,31"/>
+                            <Label Grid.Row="0" Grid.Column="0" Content="bis" Margin="108,79,299,35"/>
+                            <TextBox Text="{Binding PreisBis, UpdateSourceTrigger=PropertyChanged}" Margin="190,79,221,33"/>
+                        </Grid>
+                    </GroupBox>
+                    <ctrls:ListView Height="369" ItemsSource="{Binding Items}" SelectedViewModels="{Binding SelectedViewModels}" DockPanel.Dock="Top" Margin="0,0,39,0">
+                        <ctrls:ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="NR" DisplayMemberBinding="{Binding ID}" Width="35"/>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding FK_Kontakt}" Width="300"/>
+                                <GridViewColumn Header="ErstellungsDatum" DisplayMemberBinding="{Binding ErstellungsDatum}" Width="100"/>
+                                <GridViewColumn Header="FälligkeitsDatum" DisplayMemberBinding="{Binding FaelligkeitsDatum}" Width="100"/>
+                                <GridViewColumn Header="Kommentar" DisplayMemberBinding="{Binding Kommentar}" Width="150"/>
+                                <GridViewColumn Header="Nachricht" DisplayMemberBinding="{Binding Nachricht}" Width="150"/>
+                            </GridView>
+                        </ctrls:ListView.View>
+                    </ctrls:ListView>
+                    <Button Content="New Rechnung" Height="50" Command="{Binding NewInvoiceCommand}" DockPanel.Dock="Bottom" Margin="0,0,740,0"/>
+                </DockPanel>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

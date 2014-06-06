@@ -68,5 +68,14 @@ namespace Wpf.ViewModels
             //OnPropertyChanged("CanEditPerson");
             OnPropertyChanged("FirmaIsEnabled");
         }
+
+        public override void NewInvoiceWindow()
+        {
+        }
+
+        public override bool CanNewInvoiceWindow()
+        {
+            return true;
+        }
     }
 }

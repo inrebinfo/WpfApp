@@ -49,8 +49,28 @@ namespace Wpf.ViewModels
             }
         }
 
+        private ICommandViewModel _newInvoiceCommand;
+        public ICommandViewModel NewInvoiceCommand
+        {
+            get
+            {
+                if (_newInvoiceCommand == null)
+                {
+                    _newInvoiceCommand = new SimpleCommandViewModel(
+                        "Suchen",
+                        "Startet eine Suche",
+                        NewInvoiceWindow,
+                        CanNewInvoiceWindow);
+                }
+                return _newInvoiceCommand;
+            }
+        }
+
         public abstract void Search();
         public abstract bool CanSearch();
+
+        public abstract void NewInvoiceWindow();
+        public abstract bool CanNewInvoiceWindow();
 
         public abstract void NewContactWindow();
         public abstract bool CanNewContactWindow();

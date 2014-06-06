@@ -15,11 +15,11 @@ using Wpf.ViewModels;
 namespace Wpf
 {
     /// <summary>
-    /// Interaktionslogik für ContactForm.xaml
+    /// Interaktionslogik für InvoiceForm.xaml
     /// </summary>
-    public partial class ContactForm : Window
+    public partial class InvoiceForm : Window
     {
-        public ContactForm(ContactEditViewModel model)
+        public InvoiceForm(InvoiceEditViewModel model)
         {
             InitializeComponent();
 
@@ -27,12 +27,12 @@ namespace Wpf
             model.PropertyChanged += model_PropertyChanged;
         }
 
-        public ContactEditViewModel ViewModel
+        public InvoiceEditViewModel ViewModel
         {
 
             get
             {
-                return (ContactEditViewModel)this.DataContext;
+                return (InvoiceEditViewModel)this.DataContext;
             }
         }
 

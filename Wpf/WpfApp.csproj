@@ -71,6 +71,11 @@
     <Compile Include="Converter\InvertedBoolConverter.cs" />
     <Compile Include="Converter\ShadeConverter.cs" />
     <Compile Include="Converter\SystemDrawingConverter.cs" />
+    <Compile Include="InvoiceForm.xaml.cs">
+      <DependentUpon>InvoiceForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceLineObject.cs" />
+    <Compile Include="InvoiceObject.cs" />
     <Compile Include="Proxy.cs" />
     <Compile Include="Samples\OwnControls.xaml.cs">
       <DependentUpon>OwnControls.xaml</DependentUpon>
@@ -108,9 +113,12 @@
     <Compile Include="ViewModels\ContactEditViewModel.cs" />
     <Compile Include="ViewModels\ContactSearchViewModel.cs" />
     <Compile Include="ViewModels\ContactViewModel.cs" />
-    <Compile Include="ViewModels\InvoiceSearchViewModel.cs" />
     <Compile Include="ViewModels\EditViewModel.cs" />
     <Compile Include="ViewModels\CompanySearchViewModel.cs" />
+    <Compile Include="ViewModels\InvoiceEditViewModel.cs" />
+    <Compile Include="ViewModels\InvoiceLineViewModel.cs" />
+    <Compile Include="ViewModels\InvoiceSearchViewModel.cs" />
+    <Compile Include="ViewModels\InvoiceViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\Samples\KundenViewModel.cs" />
     <Compile Include="ViewModels\Samples\OwnControlsViewModel.cs" />
@@ -129,6 +137,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ContactForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InvoiceForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

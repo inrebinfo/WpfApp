@@ -37,6 +37,7 @@ namespace Wpf.ViewModels
             prox.SaveContact(contactToSave, _isEdit);
 
             //_wnd.Close();
+            this.Close = true;
         }
 
         public override bool CanEdit()
@@ -92,6 +93,21 @@ namespace Wpf.ViewModels
             OnPropertyChanged("IsFirma");
             OnPropertyChanged("CanEditFirma");
             OnPropertyChanged("CanEditPerson");
+        }
+
+        public bool _close = false;
+        public bool Close
+        {
+
+            get
+            {
+                return _close;
+            }
+            set
+            {
+                _close = value;
+                OnPropertyChanged("Close");
+            }
         }
 
         public void ReceiveCompany(ContactViewModel model)
