@@ -4,35 +4,43 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Wpf.ViewModels
 {
     public class InvoiceEditViewModel : EditViewModel
     {
-        private int _companyID;
+        private int _companyID { get; set; }
         public bool _isEdit { get; set; }
-        private Window _wnd;
         private double _nettoFull = 0;
         private double _bruttoFull = 0;
 
         public ObservableCollection<ViewModel> Items { get; private set; }
         public ObservableCollection<ViewModel> SelectedViewModels { get; private set; }
 
+        private List<InvoiceLineObject> invoicelines = new List<InvoiceLineObject>();
+
         public InvoiceEditViewModel()
         {
             _isEdit = true;
+            _nettoFull = 0;
+            _bruttoFull = 0;
 
             Items = new ObservableCollection<ViewModel>();
             SelectedViewModels = new ObservableCollection<ViewModel>();
 
             DatumErstellung = DateTime.Now;
             DatumFaellig = DateTime.Now;
+            ColorTransparent();
         }
 
         public InvoiceEditViewModel(string id)
         {
+            _nettoFull = 0;
+            _bruttoFull = 0;
             _isEdit = false;
             FillList(id);
+            ColorTransparent();
         }
 
 
@@ -49,11 +57,18 @@ namespace Wpf.ViewModels
 
             foreach (var item in result)
             {
-                _nettoFull += (Convert.ToDouble(item.Stkpreis) * Convert.ToDouble(item.Menge));
-
-                _bruttoFull += (Convert.ToDouble(item.Stkpreis) * Convert.ToDouble(item.Menge)) * (1 + (Convert.ToDouble(item.UST) / 100));
-
                 this.Items.Add(new InvoiceLineViewModel(item));
+                invoicelines.Add(item);
+
+                Nettogesamt = (Convert.ToDouble(Nettogesamt) + (Convert.ToDouble(item.Menge) * Convert.ToDouble(item.Stkpreis))).ToString();
+
+                double brutto = Convert.ToDouble(Bruttogesamt);
+
+                double multiplikator = (1 + (Convert.ToDouble(item.UST) / 100));
+
+                double netto = Convert.ToDouble(item.Menge) * Convert.ToDouble(item.Stkpreis);
+
+                Bruttogesamt = (brutto + (netto * multiplikator)).ToString();
             }
         }
 
@@ -65,6 +80,7 @@ namespace Wpf.ViewModels
             obj.UST = EingabeUST;
 
             this.Items.Add(new InvoiceLineViewModel(obj));
+            invoicelines.Add(obj);
 
             Nettogesamt = (Convert.ToDouble(Nettogesamt)+(Convert.ToDouble(obj.Menge) * Convert.ToDouble(obj.Stkpreis))).ToString();
 
@@ -79,22 +95,23 @@ namespace Wpf.ViewModels
 
         public override void Edit()
         {
+            InvoiceObject invoiceObj = new InvoiceObject();
+            invoiceObj.ErstellungsDatum = DatumErstellung;
+            invoiceObj.FaelligkeitsDatum = DatumFaellig;
+            invoiceObj.Kommentar = Kommentar;
+            invoiceObj.Nachricht = Nachricht;
+            invoiceObj.InvoiceLines = invoicelines;
+            invoiceObj.Summe = Nettogesamt;
+            invoiceObj.FK_Kontakt = _companyID.ToString();
 
-            //irgendwie summe aus einträgen rechnen und in .Summe speichern
+            Proxy prox = new Proxy();
+            prox.SaveInvoice(invoiceObj);
 
-            
-            /*Proxy prox = new Proxy();
-            prox.SaveContact(contactToSave);*/
-
-            //_wnd.Close();
             this.Close = true;
         }
 
         public override bool CanEdit()
         {
-            /*return !string.IsNullOrWhiteSpace(EingabeVorname)
-                || !string.IsNullOrWhiteSpace(EingabeNachname)
-                || !string.IsNullOrWhiteSpace(EingabeFirma);*/
             return true;
         }
 
@@ -102,7 +119,7 @@ namespace Wpf.ViewModels
         {
             //firmensuche
             Proxy prox = new Proxy();
-            prox.SearchCompany(EingabeKunde);
+            prox.SearchContacts(EingabeKunde);
             var result = prox.getList;
 
             this.Items.Clear();
@@ -111,25 +128,22 @@ namespace Wpf.ViewModels
             {
                 _companyID = Convert.ToInt32(result[0].ID);
                 EingabeKunde = result[0].Firmenname;
-                MessageBox.Show("genau 1");
+                ColorGreen();
             }
             else if (result.Count > 1)
             {
-                //CompanySearch wnd = new CompanySearch(result, this);
-                //wnd.Show();
-                MessageBox.Show("mehrere");
+                ColorRed();
+                CompanySearch wnd = new CompanySearch(result, this);
+                wnd.Show();
             }
             else
             {
-                MessageBox.Show("keine");
+                ColorRed();
             }
         }
 
         public override bool CanSearch()
         {
-            /*return !string.IsNullOrWhiteSpace(EingabeVorname)
-                || !string.IsNullOrWhiteSpace(EingabeNachname)
-                || !string.IsNullOrWhiteSpace(EingabeFirma);*/
             return true;
         }
 
@@ -140,16 +154,14 @@ namespace Wpf.ViewModels
 
         public void NotifyStateChanged()
         {
-            //OnPropertyChanged("EingabeFirmaKunde");
-            OnPropertyChanged("IsFirma");
-            OnPropertyChanged("CanEditFirma");
-            OnPropertyChanged("CanEditPerson");
+            OnPropertyChanged("IsEditable");
+            OnPropertyChanged("CanEditInvoice");
+            OnPropertyChanged("CanPrintInvoice");
         }
 
         public bool _close = false;
         public bool Close
         {
-
             get
             {
                 return _close;
@@ -163,43 +175,48 @@ namespace Wpf.ViewModels
 
         public void ReceiveCompany(ContactViewModel model)
         {
-            /*EingabeFirmaKunde = model.Firma;
-            _companyID = Convert.ToInt32(model.ID);*/
+            if (!string.IsNullOrWhiteSpace(model.Vorname))
+            {
+                EingabeKunde = model.Vorname + " " + model.Nachname;
+            }
+            else
+            {
+                EingabeKunde = model.Firma;
+            }
+            _companyID = Convert.ToInt32(model.ID);
+            ColorGreen();
         }
 
         // firma (Selbst) firmenzuweisung richtig setzen/filtern
         // deaktivieren properties
 
-        public bool? IsFirma
+        public bool? IsEditable
         {
             get
             {
-                /*if (string.IsNullOrWhiteSpace(EingabeNachname) && string.IsNullOrWhiteSpace(EingabeVorname) && string.IsNullOrWhiteSpace(EingabeFirma))
-                    return null;
-
-                return !string.IsNullOrWhiteSpace(EingabeFirma);*/
-                return true;
+                return !_isEdit;
             }
         }
 
         /// <summary>
         /// Enable or Disable Groupbox
         /// </summary>
-        public bool CanEditPerson
+        public bool CanEditInvoice
         {
             get
             {
-                return IsFirma == null || IsFirma == false;
+                return IsEditable == null || IsEditable == false;
             }
         }
 
-        public bool CanEditFirma
+        public bool CanPrintInvoice
         {
             get
             {
-                return IsFirma == null || IsFirma == true;
+                return IsEditable == null || IsEditable == true;
             }
         }
+
 
         private string _id;
         public string ID
@@ -310,6 +327,25 @@ namespace Wpf.ViewModels
                     _kommentar = value;
                     SearchCommand.OnCanExecuteChanged();
                     OnPropertyChanged("Kommentar");
+                    NotifyStateChanged();
+                }
+            }
+        }
+
+        private string _fkkontakt;
+        public string FK_Kontakt
+        {
+            get
+            {
+                return _fkkontakt;
+            }
+            set
+            {
+                if (_fkkontakt != value)
+                {
+                    _fkkontakt = value;
+                    SearchCommand.OnCanExecuteChanged();
+                    OnPropertyChanged("FK_Kontakt");
                     NotifyStateChanged();
                 }
             }
@@ -485,5 +521,115 @@ namespace Wpf.ViewModels
                 }
             }
         }
+
+        private ICommandViewModel _delFirmaCommand;
+        public ICommandViewModel DelFirmaCommand
+        {
+            get
+            {
+                if (_delFirmaCommand == null)
+                {
+                    _delFirmaCommand = new SimpleCommandViewModel(
+                        "Edit",
+                        "Editet",
+                        DelFirma,
+                        CanEdit);
+                }
+                return _delFirmaCommand;
+            }
+        }
+
+        public void DelFirma()
+        {
+            _companyID = 0;
+            EingabeKunde = "";
+            ColorTransparent();
+        }
+
+        public bool CanDelFirma()
+        { return true; }
+
+        public void ColorTransparent()
+        {
+            _brushobj = (Brush)new BrushConverter().ConvertFromString("Transparent");
+            OnPropertyChanged("LabelSearchName");
+            LabelColor = "Transparent";
+        }
+        public void ColorGreen()
+        {
+            _brushobj = (Brush)new BrushConverter().ConvertFromString("Green");
+            OnPropertyChanged("LabelSearchName");
+            LabelColor = "Green";
+            CanSearch();
+        }
+        public void ColorRed()
+        {
+            _brushobj = (Brush)new BrushConverter().ConvertFromString("Red");
+            OnPropertyChanged("LabelSearchName");
+            LabelColor = "Red";
+        }
+
+        private static Brush _brushobj;
+        public Brush LabelSearchName
+        {
+            get
+            {
+                return _brushobj;
+            }
+        }
+
+        private string _labelColor;
+        public string LabelColor
+        {
+            get
+            {
+                return _labelColor;
+            }
+
+            set
+            {
+                if (_labelColor != value)
+                {
+                    _labelColor = value;
+                }
+            }
+        }
+
+        private ICommandViewModel _printInvoice;
+        public ICommandViewModel PrintInvoice
+        {
+            get
+            {
+                if (_printInvoice == null)
+                {
+                    _printInvoice = new SimpleCommandViewModel(
+                        "Edit",
+                        "Editet",
+                        PrintInvoiceAction,
+                        CanPrintInvoiceButton);
+                }
+                return _printInvoice;
+            }
+        }
+
+        public void PrintInvoiceAction()
+        {
+            InvoiceObject invobj = new InvoiceObject();
+
+            invobj.ID = ID;
+            invobj.ErstellungsDatum = DatumErstellung;
+            invobj.FaelligkeitsDatum = DatumFaellig;
+            invobj.FK_Kontakt = FK_Kontakt;
+            invobj.Kommentar = Kommentar;
+            invobj.Nachricht = Nachricht;
+            invobj.InvoiceLines = invoicelines;
+
+
+            PdfCreator pdfcre = new PdfCreator();
+            pdfcre.WritePDF(invobj);
+        }
+
+        public bool CanPrintInvoiceButton()
+        { return true; }
     }
 }

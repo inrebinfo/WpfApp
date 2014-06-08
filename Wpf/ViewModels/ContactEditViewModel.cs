@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Wpf.ViewModels
 {
     public class ContactEditViewModel : EditViewModel
     {
 
-        private int _companyID;
+        public int _companyID { get; set; }
         public bool _isEdit { get; set; }
-        private Window _wnd;
 
-        
+        public ContactEditViewModel()
+        {            
+        }
 
         public override void Edit()
         {
@@ -31,20 +33,25 @@ namespace Wpf.ViewModels
             contactToSave.Ort = EingabeOrt;
             contactToSave.Firmenname = EingabeFirma;
             contactToSave.UID = EingabeUID;
-            contactToSave.FK_Kontakt = _companyID.ToString();
+            if (_companyID == 0)
+            {
+                contactToSave.FK_Kontakt = null;
+            }
+            else
+            {
+                contactToSave.FK_Kontakt = _companyID.ToString();
+            }
+
 
             Proxy prox = new Proxy();
             prox.SaveContact(contactToSave, _isEdit);
 
-            //_wnd.Close();
             this.Close = true;
         }
 
         public override bool CanEdit()
         {
-            return !string.IsNullOrWhiteSpace(EingabeVorname)
-                || !string.IsNullOrWhiteSpace(EingabeNachname)
-                || !string.IsNullOrWhiteSpace(EingabeFirma);
+            return (!string.IsNullOrWhiteSpace(EingabeVorname) && !string.IsNullOrWhiteSpace(EingabeNachname)) || (!string.IsNullOrWhiteSpace(EingabeFirma));
         }
 
         public override void Search()
@@ -60,25 +67,22 @@ namespace Wpf.ViewModels
             {
                 _companyID = Convert.ToInt32(result[0].ID);
                 EingabeFirmaKunde = result[0].Firmenname;
-                MessageBox.Show("genau 1");
+                ColorGreen();
             }
             else if (result.Count > 1)
             {
+                ColorRed();
                 CompanySearch wnd = new CompanySearch(result, this);
                 wnd.Show();
-                MessageBox.Show("mehrere");
             }
             else
             {
-                MessageBox.Show("keine");
+                ColorRed();
             }
         }
 
         public override bool CanSearch()
         {
-            /*return !string.IsNullOrWhiteSpace(EingabeVorname)
-                || !string.IsNullOrWhiteSpace(EingabeNachname)
-                || !string.IsNullOrWhiteSpace(EingabeFirma);*/
             return true;
         }
 
@@ -114,6 +118,7 @@ namespace Wpf.ViewModels
         {
             EingabeFirmaKunde = model.Firma;
             _companyID = Convert.ToInt32(model.ID);
+            ColorGreen();
         }
 
         // firma (Selbst) firmenzuweisung richtig setzen/filtern
@@ -380,5 +385,78 @@ namespace Wpf.ViewModels
         }
 
         #endregion
+
+        private ICommandViewModel _delFirmaCommand;
+        public ICommandViewModel DelFirmaCommand
+        {
+            get
+            {
+                if (_delFirmaCommand == null)
+                {
+                    _delFirmaCommand = new SimpleCommandViewModel(
+                        "Edit",
+                        "Editet",
+                        DelFirma,
+                        CanEdit);
+                }
+                return _delFirmaCommand;
+            }
+        }
+
+        public void DelFirma()
+        {
+            _companyID = 0;
+            EingabeFirmaKunde = "";
+            ColorTransparent();
+        }
+
+        public bool CanDelFirma()
+        { return true; }
+
+        public void ColorTransparent()
+        {
+            _brushobj = (Brush)new BrushConverter().ConvertFromString("Transparent");
+            OnPropertyChanged("LabelSearchName");
+            LabelColor = "Transparent";
+        }
+        public void ColorGreen()
+        {
+            _brushobj = (Brush)new BrushConverter().ConvertFromString("Green");
+            OnPropertyChanged("LabelSearchName");
+            LabelColor = "Green";
+            CanSearch();
+        }
+        public void ColorRed()
+        {
+            _brushobj = (Brush)new BrushConverter().ConvertFromString("Red");
+            OnPropertyChanged("LabelSearchName");
+            LabelColor = "Red";
+        }
+
+        private static Brush _brushobj;
+        public Brush LabelSearchName
+        {
+            get
+            {
+                return _brushobj;
+            }
+        }
+
+        private string _labelColor;
+        public string LabelColor
+        {
+            get
+            {
+                return _labelColor;
+            }
+
+            set
+            {
+                if (_labelColor != value)
+                {
+                    _labelColor = value;
+                }
+            }
+        }
     }
 }

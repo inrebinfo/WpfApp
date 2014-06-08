@@ -38,11 +38,12 @@
             </TabItem>
             <TabItem Header="Rechnung">
                 <DockPanel DataContext="{Binding InvoiceSearchViewModel}" Margin="10,3,7,5">
-                    <GroupBox DockPanel.Dock="Top" Header="Kundensuche" Height="191" Margin="10,0">
+                    <GroupBox DockPanel.Dock="Top" Header="Kundensuche" Height="184" Margin="10,0">
                         <Grid Margin="54,19,290,1" Width="483">
                             <Label Grid.Row="0" Grid.Column="0" Content="Kunde" Margin="-82,-8,489,122"/>
                             <TextBox Text="{Binding EingabeKunde, UpdateSourceTrigger=PropertyChanged}" Margin="0,-8,221,120"/>
-                            <Button IsDefault="True" Content="Rechnung Suchen" Margin="541,20,-200,17" Command="{Binding SearchCommand}" />
+                            <Button IsDefault="True" Content="Rechnung Suchen" Margin="664,17,-323,20" Command="{Binding SearchCommand}" />
+                            <Button Content="Datum leeren" Margin="491,24,-99,83" Command="{Binding ClearDateCommand}" />
                             <Label Grid.Row="0" Grid.Column="0" Content="von" Margin="-82,32,489,75"/>
 
                             <DatePicker HorizontalAlignment="Left" SelectedDate="{Binding DatumVon}" Margin="0,34,0,0" VerticalAlignment="Top" Width="160" Height="25"/>

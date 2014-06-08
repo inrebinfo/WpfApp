@@ -29,11 +29,13 @@
                 <TextBox HorizontalAlignment="Left" Height="23" Margin="87,54,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeVorname, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBox HorizontalAlignment="Left" Height="23" Margin="86,96,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeNachname, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBox HorizontalAlignment="Left" Height="23" Margin="87,137,0,0" VerticalAlignment="Top" Width="559" Text="{Binding EingabeSuffix}"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="87,171,0,0" VerticalAlignment="Top" Width="471" Text="{Binding EingabeFirmaKunde, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="121,171,0,0" VerticalAlignment="Top" Width="437" Text="{Binding EingabeFirmaKunde, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <Button IsDefault="True" Content="Suche" Margin="563,171,14,86" Command="{Binding SearchCommand}"/>
+                <Button IsDefault="True" Content="Suche" Margin="563,171,53,86" Command="{Binding SearchCommand}"/>
+                <Button Content="DEL" Margin="656,171,10,86" Command="{Binding DelFirmaCommand}"/>
                 <Label Content="Geburtstag:" Margin="9,205,579,17"/>
                 <DatePicker HorizontalAlignment="Left" Margin="98,206,0,0" VerticalAlignment="Top" Width="234" Height="25"/>
+                <Label Content="" Background="{Binding LabelSearchName}"  Margin="74,171,583,87" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Adresse" Margin="10,458,150,90" Width="672" Grid.RowSpan="2">

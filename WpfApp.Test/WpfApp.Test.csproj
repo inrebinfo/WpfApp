@@ -51,6 +51,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ContactSearchViewModelTest.cs" />
+    <Compile Include="ContactViewModelTest.cs" />
+    <Compile Include="InvoiceEditViewModelTest.cs" />
+    <Compile Include="InvoiceLineViewModelTest.cs" />
+    <Compile Include="InvoiceViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ContactEditViewModelTest.cs" />
   </ItemGroup>

@@ -29,7 +29,6 @@ namespace Wpf
 
         public ContactEditViewModel ViewModel
         {
-
             get
             {
                 return (ContactEditViewModel)this.DataContext;

@@ -22,20 +22,12 @@ namespace Wpf
 
         public List<InvoiceLineObject> _invoiceLinesList = new List<InvoiceLineObject>();
 
-
-
-        public Proxy()
-        {
-
-        }
-
         public void SearchContacts(string searchParam)
         {
             string postData = "mode=search&contact=" + searchParam;
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
 
-
-            WebRequest req = WebRequest.Create("http://localhost:8080/MicroERP.html");
+                        WebRequest req = WebRequest.Create("http://localhost:8080/MicroERP.html");
             req.Method = "POST";
 
             req.ContentType = "application/x-www-form-urlencoded";
@@ -61,15 +53,13 @@ namespace Wpf
                 var result = (List<ContactObject>)serializer.Deserialize(reader2);
                 _contactList = result;
             }
-
         }
 
         public void SearchCompany(string searchParam)
         {
             string postData = "mode=search&company=" + searchParam;
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-
-
+            
             WebRequest req = WebRequest.Create("http://localhost:8080/MicroERP.html");
             req.Method = "POST";
 
@@ -96,7 +86,6 @@ namespace Wpf
                 var result = (List<ContactObject>)serializer.Deserialize(reader2);
                 _contactList = result;
             }
-
         }
 
         public void SaveContact(ContactObject contact, bool edit)
@@ -104,8 +93,6 @@ namespace Wpf
             if (edit == true)
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(ContactObject));
-
-                byte[] respBytes;
 
                 StringWriter textWriter = new StringWriter();
 
@@ -135,9 +122,7 @@ namespace Wpf
             else
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(ContactObject));
-
-                byte[] respBytes;
-
+                
                 StringWriter textWriter = new StringWriter();
 
                 MemoryStream memstream = new MemoryStream();
@@ -169,8 +154,7 @@ namespace Wpf
         {
             string postData = "mode=search&invoice=" + searchParam;
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-
-
+            
             WebRequest req = WebRequest.Create("http://localhost:8080/MicroERP.html");
             req.Method = "POST";
 
@@ -197,14 +181,12 @@ namespace Wpf
                 var result = (List<InvoiceObject>)serializer.Deserialize(reader2);
                 _invoiceList = result;
             }
-
         }
 
         public void SearchInvoiceLines(string searchParam)
         {
             string postData = "mode=search&invoicelines=" + searchParam;
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-
 
             WebRequest req = WebRequest.Create("http://localhost:8080/MicroERP.html");
             req.Method = "POST";
@@ -232,15 +214,12 @@ namespace Wpf
                 var result = (List<InvoiceLineObject>)serializer.Deserialize(reader2);
                 _invoiceLinesList = result;
             }
-
         }
 
-        public void SaveContact(InvoiceObject invoice)
+        public void SaveInvoice(InvoiceObject invoice)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(InvoiceObject));
-
-            byte[] respBytes;
-
+            
             StringWriter textWriter = new StringWriter();
 
             MemoryStream memstream = new MemoryStream();

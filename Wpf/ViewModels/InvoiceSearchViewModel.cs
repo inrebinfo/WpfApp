@@ -21,8 +21,8 @@ namespace Wpf.ViewModels
         {
             Items = new ObservableCollection<ViewModel>();
             SelectedViewModels = new ObservableCollection<ViewModel>();
-            DatumBis = DateTime.Now;
-            DatumVon = DateTime.Now;
+            //DatumBis = DateTime.Now;
+            //DatumVon = DateTime.Now;
         }
 
         public override void Search()
@@ -35,22 +35,26 @@ namespace Wpf.ViewModels
             string preisbis;
 
             if (DatumVon == null)
-                datevon = "1900-01-01 00:00:00";
+                //datevon = "1900-01-01 00:00:00";
+                datevon = null;
             else
-                datevon = DatumVon.ToString("yyyy-MM-dd HH:MM:ss");
+                datevon = DatumVon.Value.ToString("yyyy-MM-dd HH:mm:ss");
 
             if (DatumBis == null)
-                datebis = "2100-12-31 23:59:59";
+                //datebis = "2100-12-31 23:59:59";
+                datebis = null;
             else
-                datebis = DatumBis.ToString("yyyy-MM-dd HH:MM:ss");
+                datebis = DatumBis.Value.ToString("yyyy-MM-dd HH:mm:ss");
 
             if (string.IsNullOrEmpty(PreisVon))
-                preisvon = "0";
+                //preisvon = "0";
+                preisvon = null;
             else
                 preisvon = PreisVon;
 
             if (string.IsNullOrEmpty(PreisBis))
-                preisbis = "9999999999";
+                //preisbis = "9999999999";
+                preisbis = null;
             else
                 preisbis = PreisBis;
 
@@ -106,12 +110,12 @@ namespace Wpf.ViewModels
                 try
                 {
                     _invoiceEditViewModel.ID = s.ID;
-                    //_invoiceEditViewModel.DatumErstellung = DateTime.ParseExact(s.ErstellungsDatum, "yyyy-MM-dd HH:MM:ss", CultureInfo.InvariantCulture);
-                    //_invoiceEditViewModel.DatumFaellig = DateTime.ParseExact(s.FaelligkeitsDatum, "yyyy-MM-dd HH:MM:ss", CultureInfo.InvariantCulture);
                     _invoiceEditViewModel.DatumErstellung = s.ErstellungsDatum;
                     _invoiceEditViewModel.DatumFaellig = s.FaelligkeitsDatum;
                     _invoiceEditViewModel.Kommentar = s.Kommentar;
                     _invoiceEditViewModel.Nachricht = s.Nachricht;
+                    _invoiceEditViewModel.FK_Kontakt = s.FK_Kontakt;
+
                     InvoiceForm form = new InvoiceForm(_invoiceEditViewModel);
                     form.Show();
                 }
@@ -123,9 +127,6 @@ namespace Wpf.ViewModels
 
         public void NotifyStateChanged()
         {
-            //OnPropertyChanged("IsFirma");
-            //OnPropertyChanged("CanEditPerson");
-            //OnPropertyChanged("EingabeKunde");
         }
 
         private string _eingabeKunde;
@@ -147,8 +148,8 @@ namespace Wpf.ViewModels
             }
         }
 
-        private DateTime _datumVon;
-        public DateTime DatumVon
+        private DateTime? _datumVon;
+        public DateTime? DatumVon
         {
             get
             {
@@ -166,8 +167,8 @@ namespace Wpf.ViewModels
             }
         }
 
-        private DateTime _datumBis;
-        public DateTime DatumBis
+        private DateTime? _datumBis;
+        public DateTime? DatumBis
         {
             get
             {
@@ -232,5 +233,31 @@ namespace Wpf.ViewModels
         {
             return true;
         }
+
+        private ICommandViewModel _clearDateCommand;
+        public ICommandViewModel ClearDateCommand
+        {
+            get
+            {
+                if (_clearDateCommand == null)
+                {
+                    _clearDateCommand = new SimpleCommandViewModel(
+                        "Edit",
+                        "Editet",
+                        ClearDate,
+                        CanClearDate);
+                }
+                return _clearDateCommand;
+            }
+        }
+
+        public void ClearDate()
+        {
+            DatumVon = null;
+            DatumBis = null;
+        }
+
+        public bool CanClearDate()
+        { return true; }
     }
 }

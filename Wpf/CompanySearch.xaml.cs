@@ -24,5 +24,11 @@ namespace Wpf
             InitializeComponent();
             this.DataContext = new CompanySearchViewModel(list, model, this);
         }
+
+        public CompanySearch(List<ContactObject> list, InvoiceEditViewModel model)
+        {
+            InitializeComponent();
+            this.DataContext = new CompanySearchViewModel(list, model, this);
+        }
     }
 }

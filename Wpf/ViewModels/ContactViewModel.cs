@@ -58,19 +58,19 @@ namespace Wpf.ViewModels
             }
         }
 
-        private string _firma;
+        private string _firmenname;
         public string Firma
         {
             get
             {
-                return _firma;
+                return _firmenname;
             }
             set
             {
-                if (_firma != value)
+                if (_firmenname != value)
                 {
-                    _firma = value;
-                    OnPropertyChanged("Firma");
+                    _firmenname = value;
+                    OnPropertyChanged("Firmenname");
                 }
             }
         }
@@ -221,7 +221,7 @@ namespace Wpf.ViewModels
             this.item = item;
 
             _id = item.ID;
-            _firma = item.Firmenname;
+            _firmenname = item.Firmenname;
             _vorname = item.Vorname;
             _nachname = item.Nachname;
             _titel = item.Titel;
@@ -240,7 +240,7 @@ namespace Wpf.ViewModels
         /// <param name="item"></param>
         public void ApplyChanges()
         {
-            item.Firmenname = _firma;
+            item.Firmenname = _firmenname;
             item.Vorname = _vorname;
             item.Nachname = _nachname;
 

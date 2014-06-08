@@ -3,28 +3,30 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ctrls="clr-namespace:Wpf.Controls"
         xmlns:vmdl="clr-namespace:Wpf.ViewModels"
-        Title="InvoiceForm" Height="752" Width="853">
+        Title="InvoiceForm" Height="817.672" Width="1197.777">
     <Grid>
         <DockPanel Margin="0,0,0,10">
-            <GroupBox Header="Privat" Margin="10,10,111,10" Width="830">
-                <Grid Margin="0,0,-2,-12">
+            <GroupBox Header="Privat" Margin="10,10,111,10" Width="830" IsEnabled="{Binding CanEditInvoice}" DockPanel.Dock="Top">
+                <Grid Margin="0,0,-2,-12" Height="511">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="23*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content ="Erstellungsdatum" Margin="10,13,665,633"/>
-                    <DatePicker Margin="118,14,528,633" SelectedDate="{Binding DatumErstellung, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Content ="Erstellungsdatum" Margin="10,13,665,465"/>
+                    <DatePicker Margin="118,14,528,465" SelectedDate="{Binding DatumErstellung, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <Label Content ="Fälligkeitsdatum" Margin="303,14,321,635"/>
-                    <DatePicker Margin="405,14,214,636" SelectedDate="{Binding DatumFaellig, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label Content ="Nachricht" Margin="118,110,590,534"/>
-                    <TextBox Margin="388,147,184,450" Text="{Binding Nachricht, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label Content ="Kommentar" Margin="371,110,280,534"/>
-                    <TextBox Margin="106,147,443,450" Text="{Binding Kommentar, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label Content="Für Kunde" Margin="10,67,665,576"/>
-                    <TextBox HorizontalAlignment="Left" Height="38" Margin="106,67,0,0" VerticalAlignment="Top" Width="241" Text="{Binding EingabeKunde, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Button IsDefault="True" Content="Suche" Margin="366,67,253,576" Command="{Binding SearchCommand}"/>
+                    <Label Content ="Fälligkeitsdatum" Margin="303,14,321,465"/>
+                    <DatePicker Margin="405,14,214,465" SelectedDate="{Binding DatumFaellig, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Content ="Kommentar" Margin="371,110,280,369"/>
+                    <TextBox Margin="388,147,184,304" Text="{Binding Kommentar, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Content ="Nachricht" Margin="118,110,590,369"/>
+                    <TextBox Margin="106,147,443,304" Text="{Binding Nachricht, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Content="Für Kunde" Margin="10,67,665,406"/>
+                    <Label Content="" Background="{Binding LabelSearchName}"  Margin="78,72,707,406" />
+                    <TextBox HorizontalAlignment="Left" Height="38" Margin="118,67,0,0" VerticalAlignment="Top" Width="229" Text="{Binding EingabeKunde, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button IsDefault="True" Content="Suche" Margin="366,67,253,406" Command="{Binding SearchCommand}"/>
+                    <Button Content="DEL" Margin="587,67,184,408" Command="{Binding DelFirmaCommand}"/>
                     <Button Content="Speichern" HorizontalAlignment="Left" Margin="562,247,0,0" VerticalAlignment="Top" Width="74" Height="42" Command="{Binding EditCommand}"/>
-                    <ctrls:ListView ItemsSource="{Binding Items}" SelectedViewModels="{Binding SelectedViewModels}" DockPanel.Dock="Top" Margin="10,257,466,91">
+                    <ctrls:ListView ItemsSource="{Binding Items}" SelectedViewModels="{Binding SelectedViewModels}" DockPanel.Dock="Top" Margin="10,257,466,81">
                         <ctrls:ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Menge" DisplayMemberBinding="{Binding Menge}" Width="100"/>
@@ -37,15 +39,17 @@
                     <Label Content="{Binding Nettogesamt, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="480,267,0,0" VerticalAlignment="Top"/>
                     <Label Content="Gesamtpreis Brutto" HorizontalAlignment="Left" Margin="366,288,0,0" VerticalAlignment="Top"/>
                     <Label Content="{Binding Bruttogesamt, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="480,296,0,0" VerticalAlignment="Top"/>
-                    <Button Content="Add New Line" HorizontalAlignment="Left" Margin="313,616,0,0" VerticalAlignment="Top" Width="100" Height="42" Command="{Binding AddNewLineCommand}"/>
-                    <Label Content="Menge" HorizontalAlignment="Left" Margin="10,595,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Stückpreis" HorizontalAlignment="Left" Margin="118,595,0,0" VerticalAlignment="Top"/>
-                    <Label Content="UST" HorizontalAlignment="Left" Margin="245,595,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="10,635,0,0" TextWrapping="Wrap" Text="{Binding EingabeMenge}" VerticalAlignment="Top" Width="60"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="118,635,0,0" TextWrapping="Wrap" Text="{Binding EingabeStkpreis}" VerticalAlignment="Top" Width="60"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="232,635,0,0" TextWrapping="Wrap" Text="{Binding EingabeUST}" VerticalAlignment="Top" Width="60"/>
-
+                    <Button Content="Add New Line" HorizontalAlignment="Left" Margin="317,451,0,0" VerticalAlignment="Top" Width="100" Height="42" Command="{Binding AddNewLineCommand}"/>
+                    <Label Content="Menge" HorizontalAlignment="Left" Margin="14,430,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Stückpreis" HorizontalAlignment="Left" Margin="122,430,0,0" VerticalAlignment="Top"/>
+                    <Label Content="UST" HorizontalAlignment="Left" Margin="249,430,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="14,470,0,0" TextWrapping="Wrap" Text="{Binding EingabeMenge}" VerticalAlignment="Top" Width="60"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="122,470,0,0" TextWrapping="Wrap" Text="{Binding EingabeStkpreis}" VerticalAlignment="Top" Width="60"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="236,470,0,0" TextWrapping="Wrap" Text="{Binding EingabeUST}" VerticalAlignment="Top" Width="60"/>
                 </Grid>
+            </GroupBox>
+            <GroupBox Header="Drucken" Margin="10,0,0,0" IsEnabled="{Binding CanPrintInvoice}" DockPanel.Dock="Top" Height="97">
+                <Button Content="Rechnung drucken" HorizontalAlignment="Left" Height="57" VerticalAlignment="Top" Width="232" Command="{Binding PrintInvoice}"/>
             </GroupBox>
         </DockPanel>
     </Grid>

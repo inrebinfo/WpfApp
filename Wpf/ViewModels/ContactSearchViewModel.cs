@@ -75,13 +75,21 @@ namespace Wpf.ViewModels
                 _contactEditViewModel = new ContactEditViewModel();
 
                 _contactEditViewModel.ID = s.ID;
-                _contactEditViewModel.EingabeFirma = s.Firma;
-                _contactEditViewModel.EingabeTitel = s.Titel;
-                _contactEditViewModel.EingabeVorname = s.Vorname;
-                _contactEditViewModel.EingabeNachname = s.Nachname;
-                _contactEditViewModel.EingabeSuffix = s.Suffix;
-                _contactEditViewModel.EingabeGeburtstag = s.Geburtstag;
-                _contactEditViewModel.EingabeUID = s.UID;
+                if (!string.IsNullOrWhiteSpace(s.Vorname))
+                {
+                    _contactEditViewModel.EingabeFirmaKunde = s.Firma;
+                    _contactEditViewModel.EingabeTitel = s.Titel;
+                    _contactEditViewModel.EingabeVorname = s.Vorname;
+                    _contactEditViewModel.EingabeNachname = s.Nachname;
+                    _contactEditViewModel.EingabeSuffix = s.Suffix;
+                    _contactEditViewModel.EingabeGeburtstag = s.Geburtstag;
+                    _contactEditViewModel._companyID = Convert.ToInt32(s.FK_Kontakt);
+                }
+                else if (!string.IsNullOrWhiteSpace(s.Firma))
+                {
+                    _contactEditViewModel.EingabeFirma = s.Firma;
+                    _contactEditViewModel.EingabeUID = s.UID;
+                }
                 _contactEditViewModel.EingabeStrasse = s.Strasse;
                 _contactEditViewModel.EingabePLZ = s.PLZ;
                 _contactEditViewModel.EingabeOrt = s.Ort;

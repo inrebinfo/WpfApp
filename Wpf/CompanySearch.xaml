@@ -2,13 +2,15 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:Wpf.Controls" x:Class="Wpf.CompanySearch"
-        Title="CompanySearch" Height="321.756" Width="610.305">
+        Title="CompanySearch" Height="321.756" Width="950.305">
     <Grid>
 
-        <Controls:ListView HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="271" Width="582" ItemsSource="{Binding Items}" SelectedViewModels="{Binding SelectedViewModels}">
+        <Controls:ListView Margin="10,10,10,0" VerticalAlignment="Top" Height="271" ItemsSource="{Binding Items}" SelectedViewModels="{Binding SelectedViewModels}">
             <Controls:ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Firma" DisplayMemberBinding="{Binding Firmenname}" Width="150"/>
+                    <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Vorname}" Width="150"/>
+                    <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Nachname}" Width="150"/>
+                    <GridViewColumn Header="Firma" DisplayMemberBinding="{Binding Firma}" Width="150"/>
                     <GridViewColumn Header="UID" DisplayMemberBinding="{Binding UID}" Width="75"/>
                     <GridViewColumn Header="Strasse" DisplayMemberBinding="{Binding Strasse}" Width="150"/>
                     <GridViewColumn Header="PLZ" DisplayMemberBinding="{Binding PLZ}" Width="50"/>

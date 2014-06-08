@@ -12,7 +12,8 @@ namespace Wpf.ViewModels
         public ObservableCollection<ViewModel> Items { get; private set; }
         public ObservableCollection<ViewModel> SelectedViewModels { get; private set; }
 
-        private ContactEditViewModel _contactEditViewModel;
+        private ContactEditViewModel _contactEditViewModel = null;
+        private InvoiceEditViewModel _invoiceEditViewModel = null;
         private Window _wnd;
 
         public CompanySearchViewModel(List<ContactObject> list, ContactEditViewModel model, Window wnd)
@@ -20,6 +21,19 @@ namespace Wpf.ViewModels
             Items = new ObservableCollection<ViewModel>();
             SelectedViewModels = new ObservableCollection<ViewModel>();
             _contactEditViewModel = model;
+            _wnd = wnd;
+
+            foreach (var item in list)
+            {
+                this.Items.Add(new ContactViewModel(item));
+            }
+        }
+
+        public CompanySearchViewModel(List<ContactObject> list, InvoiceEditViewModel model, Window wnd)
+        {
+            Items = new ObservableCollection<ViewModel>();
+            SelectedViewModels = new ObservableCollection<ViewModel>();
+            _invoiceEditViewModel = model;
             _wnd = wnd;
 
             foreach (var item in list)
@@ -57,7 +71,14 @@ namespace Wpf.ViewModels
 
             foreach (ContactViewModel s in items)
             {
-                _contactEditViewModel.ReceiveCompany(s);
+                if (_contactEditViewModel != null)
+                {
+                    _contactEditViewModel.ReceiveCompany(s);
+                }
+                else if (_invoiceEditViewModel != null)
+                {
+                    _invoiceEditViewModel.ReceiveCompany(s);
+                }
                 _wnd.Close();
             }
         }
